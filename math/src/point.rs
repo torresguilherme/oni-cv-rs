@@ -1,11 +1,11 @@
-/// Point2D
-/// Implements the functionality of a point in an image or two-dimensional space
-pub struct Point2D {
+/// EPoint2D
+/// Implements the functionality of an euclidean point in an image or two-dimensional space
+pub struct EPoint2D {
     pub x: f64,
     pub y: f64
 }
 
-impl Default for Point2D {
+impl Default for EPoint2D {
     fn default() -> Self {
         Self {
             x: 0.0,
@@ -14,30 +14,48 @@ impl Default for Point2D {
     }
 }
 
-/* Indexes for points won't be implemented for now
- * because I can't think of a way to do this effectively without the possibility of panicking...
-impl Index<usize> for Point2D {
-    type Output = f64;
+fn homogenize2d(point: &EPoint2D) -> HPoint2D {
+    HPoint2D {
+        x: point.x,
+        y: point.y,
+        w: 1.0
+    }
+}
 
-    fn index(&self, num: usize) -> &Self::Output {
-        match num {
-            0 => &self.x,
-            1 => &self.y,
-            _ => panic!("Index out of bounds for Point2D")
+/// HPoint2D
+/// Implements a homogenized 2D point
+pub struct HPoint2D {
+    pub x: f64,
+    pub y: f64,
+    pub w: f64
+}
+
+impl Default for HPoint2D {
+    fn default() -> Self {
+        Self {
+            x: 0.0,
+            y: 0.0,
+            w: 1.0
         }
     }
 }
- */
 
-/// Point3D
-/// Implements the functionality of a point in a three-dimensional space
-pub struct Point3D {
+fn dehomogenize2d(point: &HPoint2D) -> EPoint2D {
+    EPoint2D {
+        x: point.x / point.w,
+        y: point.y / point.w
+    }
+}
+
+/// EPoint3D
+/// Implements the functionality of an euclidean point in a three-dimensional space
+pub struct EPoint3D {
     pub x: f64,
     pub y: f64,
     pub z: f64
 }
 
-impl Default for Point3D {
+impl Default for EPoint3D {
     fn default() -> Self {
         Self {
             x: 0.0,
@@ -45,4 +63,55 @@ impl Default for Point3D {
             z: 0.0
         }
     }
+}
+
+fn homogenize3d(point: &EPoint3D) -> HPoint3D {
+    HPoint3D {
+        x: point.x,
+        y: point.y,
+        z: point.z,
+        w: 1.0
+    }
+}
+
+/// HPoint3D
+/// Implements an homogenized 3D point
+pub struct HPoint3D {
+    pub x: f64,
+    pub y: f64,
+    pub z: f64,
+    pub w: f64
+}
+
+impl Default for HPoint3D {
+    fn default() -> Self {
+        Self {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            w: 1.0
+        }
+    }
+}
+
+fn dehomogenize3d(point: &HPoint3D) -> EPoint3D {
+    EPoint3D {
+        x: point.x / point.w,
+        y: point.y / point.w,
+        z: point.z / point.w
+    }
+}
+
+/// enum Point2D
+/// Wraps the value of a 2D point that can be either represented in euclidean or homogenous coordinates
+pub enum Point2D {
+    EuclideanPoint(EPoint2D),
+    HomogenousPoint(HPoint2D)
+}
+
+/// enum Point3D
+/// Wraps the value of a 3D point that can be either represented in euclidean or homogenous coordinates
+pub enum Point3D {
+    EuclideanPoint(EPoint3D),
+    HomogenousPoint(HPoint3D)
 }

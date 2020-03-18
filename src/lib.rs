@@ -1,6 +1,3 @@
-use math;
-use img_proc;
-
 #[cfg(test)]
 mod tests {
     #[test]
