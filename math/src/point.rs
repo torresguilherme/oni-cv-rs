@@ -14,7 +14,9 @@ impl Default for EPoint2D {
     }
 }
 
-fn homogenize2d(point: &EPoint2D) -> HPoint2D {
+/// fn homogenize2d
+/// Turns an euclidean 2D point into a homogenous one
+pub fn homogenize2d(point: &EPoint2D) -> HPoint2D {
     HPoint2D {
         x: point.x,
         y: point.y,
@@ -40,7 +42,9 @@ impl Default for HPoint2D {
     }
 }
 
-fn dehomogenize2d(point: &HPoint2D) -> EPoint2D {
+/// fn dehomogenize2d
+/// Divides the homogenous' coordinates of a point by the 'w' coordinate, de-homogenizing it
+pub fn dehomogenize2d(point: &HPoint2D) -> EPoint2D {
     EPoint2D {
         x: point.x / point.w,
         y: point.y / point.w
@@ -65,7 +69,9 @@ impl Default for EPoint3D {
     }
 }
 
-fn homogenize3d(point: &EPoint3D) -> HPoint3D {
+/// fn homogenize3d
+/// Turns an euclidean 3D point into a homogenous one
+pub fn homogenize3d(point: &EPoint3D) -> HPoint3D {
     HPoint3D {
         x: point.x,
         y: point.y,
@@ -94,7 +100,9 @@ impl Default for HPoint3D {
     }
 }
 
-fn dehomogenize3d(point: &HPoint3D) -> EPoint3D {
+/// fn dehomogenize3d
+/// Divides the homogenous' coordinates of a point by the 'w' coordinate, de-homogenizing it
+pub fn dehomogenize3d(point: &HPoint3D) -> EPoint3D {
     EPoint3D {
         x: point.x / point.w,
         y: point.y / point.w,
