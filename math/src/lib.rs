@@ -7,6 +7,8 @@ pub mod macros;
 pub mod point;
 pub mod line;
 pub mod plane;
+pub mod matrix;
+pub mod conic;
 
 // Operations
 pub mod vector_ops;

@@ -50,3 +50,7 @@ pub enum Vector3 {
     Homogenous2D(HPoint2D),
     Euclidean3D(EPoint3D)
 }
+
+pub enum Vector4 {
+    HPoint3D
+}
